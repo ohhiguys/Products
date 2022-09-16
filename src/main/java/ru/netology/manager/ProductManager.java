@@ -17,7 +17,7 @@ public class ProductManager {
     }
 
     public Product[] searchBy(String text) {
-        Product[] result = new Product[0];
+        Product[] result = new Product[1];
         for (Product product : repo.findAll()) {
             if (matches(product, text)) {
                 Product[] tmp = new Product[result.length + 1];
@@ -36,6 +36,15 @@ public class ProductManager {
                 return true;
             }
             if (smartphone.getManufacturer().contains(search)) {
+                return true;
+            }
+        }
+        if (product instanceof Book) {
+            Book book = (Book) product;
+            if (book.getAuthor().contains(search)) {
+                return true;
+            }
+            if (book.getName().contains(search)) {
                 return true;
             }
         }
